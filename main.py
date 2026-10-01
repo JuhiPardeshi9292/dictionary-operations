@@ -1,5 +1,4 @@
-from dictionary import get_first_name, get_rank, del_user, get_money, update_money, inc_amt, dec_amt, del_money, \
-    del_rank_safe
+from dictionary import get_first_name, get_rank, del_user, get_money, update_money, inc_amt, dec_amt, del_money, del_rank
 from functions import calc_func, calc_sum
 
 u_c_map: dict[str, str] = {
@@ -49,5 +48,4 @@ if __name__ == '__main__':
     print(c_ln_map)
     print(c_rank_map)
     print(del_money(20, rank_money_map))
-    print(del_rank_safe(20, c_rank_map, rank_money_map))
-
+    print(del_rank(8, c_rank_map, rank_money_map))
