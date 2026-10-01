@@ -248,3 +248,12 @@ def calc_t(n: int) -> int:
         i += 1
 
     return total
+
+def calc_u(n: int) -> float:
+    """
+    Calculate the value of the recursive function.
+
+    :param n: Number used in the calculation.
+    :returns: Value of the function.
+    """
+    return n + (calc_t(n - 1) / calc_s(n - 1))
