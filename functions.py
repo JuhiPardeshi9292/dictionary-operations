@@ -62,3 +62,39 @@ def calc_sum(x: int, n: int) -> float:
         total = total + n_term
         i += 1
     return total
+
+def calc_function(x: int, n: int) -> float:
+    """
+    Calculate the value of the function.
+
+    :param x: Value of x.
+    :param n: Value of n.
+    :returns: Value of the function.
+    """
+    if x == 0 or n == 0:
+        return 1
+    elif x <= n / 2:
+        return x ** n
+    else:
+        return n ** x
+
+
+def calc_sum(x: int, n: int) -> float:
+    """
+    Calculate the alternating sum of the series.
+
+    :param x: Value of x.
+    :param n: Number of terms.
+    :returns: Sum of the series.
+    """
+    total = 0
+    i = 0
+
+    while i < n:
+        term = calc_function(i, n) / calc_function(i + 1, n)
+        if i % 2 == 0:
+            total = total + term
+        else:
+            total = total - term
+        i += 1
+    return total
