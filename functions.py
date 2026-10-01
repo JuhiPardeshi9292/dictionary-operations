@@ -156,3 +156,36 @@ def binomial_sum(a: int, b: int, n: int) -> int:
         i += 1
 
     return total
+
+def calc_func(x: int, n: int) -> int:
+    """
+    Calculate the sum of powers of x from 0 to n.
+
+    :param x: Value of x.
+    :param n: Number of terms.
+    :returns: Sum of powers.
+    """
+    total = 0
+    i = 0
+    while i <= n:
+        total = total + (x ** i)
+        i += 1
+
+    return total
+
+
+def calc_g(n: int) -> float:
+    """
+    Calculate the sum of series of power sums.
+
+    :param n: Number of terms.
+    :returns: Calculated sum.
+    """
+    total = 0
+    i = 0
+    while i < n:
+        term = calc_func(i, n) / calc_func(i + 1, n)
+        total = total + term
+        i += 1
+
+    return total
