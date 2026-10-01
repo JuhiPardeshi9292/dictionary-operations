@@ -189,3 +189,15 @@ def calc_g(n: int) -> float:
         i += 1
 
     return total
+
+def calc_g(x: int) -> int:
+    """
+    Calculate the sum from x down to 1.
+
+    :param x: Starting value.
+    :returns: Sum of values.
+    """
+    if x <= 0:
+        return 1
+    else:
+        return x + calc_g(x - 1)
