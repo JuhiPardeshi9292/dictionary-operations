@@ -13,3 +13,7 @@ def get_rank(uid: str, c_rank_map: dict[str, int], u_c_map: dict[str, str]) -> i
     rank = c_rank_map[can_uid]
     return rank
 
+def del_money(uid: str, rank_money_map: dict[int, int], c_rank_map: dict[str, int], u_c_map: dict[str, str]) -> dict[int, int]:
+    rank = get_rank(uid, c_rank_map, u_c_map)
+    del rank_money_map[rank]
+    return rank_money_map
