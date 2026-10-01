@@ -69,3 +69,17 @@ def update_first_name(uid: str, new_first_name: str, c_fn_map: dict[str, str], u
     c_fn_map[can_uid] = new_first_name
     return first_name
 
+def update_last_name(uid: str, new_last_name: str, c_fn_map: dict[str, str], u_c_map: dict[str, str]) -> str:
+    """
+    Update the last name of a user.
+
+    :param uid: Human-readable user ID.
+    :param new_last_name: New last name to assign.
+    :param c_fn_map: Mapping of canonical user ID to last name.
+    :param u_c_map: Mapping of human-readable user ID to canonical user ID.
+    :return: The updated last name.
+    """
+    last_name = get_first_name(uid, c_fn_map, u_c_map)
+    can_uid = u_c_map[uid]
+    c_fn_map[can_uid] = new_last_name
+    return last_name
