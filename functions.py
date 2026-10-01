@@ -257,3 +257,4 @@ def calc_u(n: int) -> float:
     :returns: Value of the function.
     """
     return n + (calc_t(n - 1) / calc_s(n - 1))
+
