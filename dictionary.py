@@ -112,3 +112,17 @@ def get_money(uid: str, rank_money_map: dict[int, int], c_rank_map: dict[str, in
     rank = get_rank(uid, c_rank_map, u_c_map)
     money = rank_money_map[rank]
     return money
+
+def inc_amt(rank: int, inc_amt: int, rank_money_map: dict[int, int]) -> int:
+    """
+    Increase the money associated with a rank.
+
+    :param rank: Rank whose money needs to be increased.
+    :param inc_amt: Amount to increase.
+    :param rank_money_map: Mapping of rank to money.
+    :return: The updated money amount.
+    """
+    prev_money = rank_money_map[rank]
+    new_money = prev_money + inc_amt
+    rank_money_map[rank] = new_money
+    return new_money
