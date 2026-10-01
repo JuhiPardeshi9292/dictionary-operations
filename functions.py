@@ -201,3 +201,20 @@ def calc_g(x: int) -> int:
         return 1
     else:
         return x + calc_g(x - 1)
+
+def calc_h(x: int, n: int) -> float:
+    """
+    Calculate the sum of series values of calc_g.
+
+    :param x: Starting value.
+    :param n: Number of terms.
+    :returns: Calculated sum.
+    """
+    total = 0
+    i = 0
+    while i < n:
+        term = calc_g(x - i) / calc_g(x - i - 1)
+        total = total + term
+        i += 1
+
+    return total
