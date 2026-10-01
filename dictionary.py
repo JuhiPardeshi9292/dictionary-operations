@@ -138,3 +138,15 @@ def dec_amt(rank: int, dec_amt: int, rank_money_map: dict[int, int]) -> int:
     """
     prev_amt = inc_amt(rank, -dec_amt, rank_money_map)
     return prev_amt
+
+def del_user(uid: str, u_c_map: dict[str, str], c_fn_map: dict[str, str], c_ln_map: dict[str, str], c_rank_map: dict[str, int]) -> \
+tuple[str, str, str, int]:
+    can_uid = u_c_map[uid]
+    prev_rank = c_rank_map[can_uid]
+    prev_fn = c_fn_map[can_uid]
+    prev_ln = c_ln_map[can_uid]
+    del u_c_map[uid]
+    del c_fn_map[can_uid]
+    del c_ln_map[can_uid]
+    del c_rank_map[can_uid]
+    return can_uid, prev_fn, prev_ln, prev_rank
