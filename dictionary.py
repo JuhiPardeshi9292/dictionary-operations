@@ -141,6 +141,16 @@ def dec_amt(rank: int, dec_amt: int, rank_money_map: dict[int, int]) -> int:
 
 def del_user(uid: str, u_c_map: dict[str, str], c_fn_map: dict[str, str], c_ln_map: dict[str, str], c_rank_map: dict[str, int]) -> \
 tuple[str, str, str, int]:
+    """
+    Delete a user from all user-related maps.
+
+    :param uid: Human-readable user ID.
+    :param u_c_map: Mapping of human-readable user ID to canonical user ID.
+    :param c_fn_map: Mapping of canonical user ID to first name.
+    :param c_ln_map: Mapping of canonical user ID to last name.
+    :param c_rank_map: Mapping of canonical user ID to rank.
+    :returns: The canonical user ID, previous first name, previous last name, and previous rank.
+    """
     can_uid = u_c_map[uid]
     prev_rank = c_rank_map[can_uid]
     prev_fn = c_fn_map[can_uid]
