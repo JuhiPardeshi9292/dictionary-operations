@@ -83,3 +83,18 @@ def update_last_name(uid: str, new_last_name: str, c_fn_map: dict[str, str], u_c
     can_uid = u_c_map[uid]
     c_fn_map[can_uid] = new_last_name
     return last_name
+
+def update_rank(uid: str, new_rank: int, c_rank_map: dict[str, int], u_c_map: dict[str, str]) -> int:
+    """
+    Update the rank of a user.
+
+    :param uid: Human-readable user ID.
+    :param new_rank: New rank to assign.
+    :param c_rank_map: Mapping of canonical user ID to rank.
+    :param u_c_map: Mapping of human-readable user ID to canonical user ID.
+    :returns: The updated rank.
+    """
+    prev_rank = get_rank(uid, c_rank_map, u_c_map)
+    can_uid = u_c_map[uid]
+    c_rank_map[can_uid] = new_rank
+    return prev_rank
