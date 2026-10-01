@@ -233,3 +233,18 @@ def calc_s(n: int) -> int:
         i += 1
 
     return total
+
+def calc_t(n: int) -> int:
+    """
+    Calculate the sum of i raised to the power i.
+
+    :param n: Number of terms.
+    :returns: Sum of the series.
+    """
+    total = 0
+    i = 1
+    while i <= n:
+        total = total + (i ** i)
+        i += 1
+
+    return total
