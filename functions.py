@@ -98,3 +98,43 @@ def calc_sum(x: int, n: int) -> float:
             total = total - term
         i += 1
     return total
+
+
+def factorial(n: int) -> int:
+    """
+    Calculate the factorial of a number.
+
+    :param n: Number whose factorial is required.
+    :returns: Factorial of n.
+    """
+    if n == 0:
+        return 1
+    else:
+        return n * factorial(n - 1)
+
+def n_C_r(n: int, r: int) -> int:
+    """
+    Calculate the binomial coefficient nCr.
+
+    :param n: Total number of items.
+    :param r: Number of selected items.
+    :returns: Value of nCr.
+    """
+    return factorial(n) / (factorial(r) * factorial(n - r))
+
+def exp_sum(x: int, n: int) -> float:
+    """
+    Calculate the sum of the exponential series.
+
+    :param x: Value of x.
+    :param n: Number of terms.
+    :returns: Sum of the series.
+    """
+    total = 0
+    i = 0
+    while i <= n:
+        term = (x ** i) / factorial(i)
+        total = total + term
+        i += 1
+
+    return total
