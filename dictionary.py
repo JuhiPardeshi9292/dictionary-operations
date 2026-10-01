@@ -126,3 +126,15 @@ def inc_amt(rank: int, inc_amt: int, rank_money_map: dict[int, int]) -> int:
     new_money = prev_money + inc_amt
     rank_money_map[rank] = new_money
     return new_money
+
+def dec_amt(rank: int, dec_amt: int, rank_money_map: dict[int, int]) -> int:
+    """
+    Decrease the money associated with a rank.
+
+    :param rank: Rank whose money needs to be decreased.
+    :param dec_amt: Amount to decrease.
+    :param rank_money_map: Mapping of rank to money.
+    :return: The updated money amount.
+    """
+    prev_amt = inc_amt(rank, -dec_amt, rank_money_map)
+    return prev_amt
