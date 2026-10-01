@@ -199,7 +199,7 @@ def del_money_unsafe(money: int, rank_money_map_l: dict[int, int]):
     deletable_ranks: set[int] = set()
 
     for rank in rank_money_map_l:
-        if  money == rank_money_map_l[rank]
+        if  money == rank_money_map_l[rank]:
             deletable_ranks.add(rank)
 
     for rank in deletable_ranks:
