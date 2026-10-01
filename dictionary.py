@@ -171,3 +171,19 @@ def del_money(rank: int, rank_money_map: dict[int, int]) -> dict[int, int]:
     """
     del rank_money_map[rank]
     return rank_money_map
+
+def del_rank_safe(rank: int, c_rank_map_l: dict[str, int], rank_money_map_l: dict[int, int]) -> tuple[bool, int]:
+    """
+    Delete a rank if it is not assigned to any user.
+
+    :param rank: Rank to be deleted.
+    :param c_rank_map_l: Mapping of canonical user ID to rank.
+    :param rank_money_map_l: Mapping of rank to money.
+    :return: A tuple containing whether the rank was deleted and its previous money.
+    """
+    for can_uid in c_rank_map_l:
+        if rank == c_rank_map_l[can_uid]:
+            prev_money = rank_money_map_l[rank]
+            return False, prev_money
+    prev_money = del_rank_safe(rank, rank_money_map_l)
+    return True, prev_money
