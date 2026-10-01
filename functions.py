@@ -218,3 +218,18 @@ def calc_h(x: int, n: int) -> float:
         i += 1
 
     return total
+
+def calc_s(n: int) -> int:
+    """
+    Calculate the sum of squares from 1 to n.
+
+    :param n: Number of terms.
+    :returns: Sum of squares.
+    """
+    total = 0
+    i = 1
+    while i <= n:
+        total = total + (i * i)
+        i += 1
+
+    return total
