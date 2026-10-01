@@ -160,3 +160,14 @@ tuple[str, str, str, int]:
     del c_ln_map[can_uid]
     del c_rank_map[can_uid]
     return can_uid, prev_fn, prev_ln, prev_rank
+
+def del_money(rank: int, rank_money_map: dict[int, int]) -> dict[int, int]:
+    """
+    Delete the money associated with a rank.
+
+    :param rank: Rank whose money needs to be deleted.
+    :param rank_money_map: Mapping of rank to money.
+    :returns: Updated rank-to-money mapping.
+    """
+    del rank_money_map[rank]
+    return rank_money_map
