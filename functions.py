@@ -138,3 +138,21 @@ def exp_sum(x: int, n: int) -> float:
         i += 1
 
     return total
+
+def binomial_sum(a: int, b: int, n: int) -> int:
+    """
+    Calculate the binomial expansion sum.
+
+    :param a: First value.
+    :param b: Second value.
+    :param n: Power of the binomial.
+    :returns: Sum of the binomial expansion.
+    """
+    total = 0
+    i = 0
+    while i <= n:
+        term = n_C_r(n, i) * (a ** (n - i)) * (b ** i)
+        total = total + term
+        i += 1
+
+    return total
