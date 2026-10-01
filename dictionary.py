@@ -140,7 +140,7 @@ def dec_amt(rank: int, dec_amt: int, rank_money_map: dict[int, int]) -> int:
     return prev_amt
 
 def del_user(uid: str, u_c_map: dict[str, str], c_fn_map: dict[str, str], c_ln_map: dict[str, str], c_rank_map: dict[str, int]) -> \
-tuple[str, str, str, int]:
+        dict[str, str | int]:
     """
     Delete a user from all user-related maps.
 
@@ -159,7 +159,12 @@ tuple[str, str, str, int]:
     del c_fn_map[can_uid]
     del c_ln_map[can_uid]
     del c_rank_map[can_uid]
-    return can_uid, prev_fn, prev_ln, prev_rank
+    return {
+        "uid": can_uid,
+        "first_name": prev_fn,
+        "last_name": prev_ln,
+        "rank": prev_rank
+    }
 
 def del_money(rank: int, rank_money_map: dict[int, int]) -> dict[int, int]:
     """
@@ -172,21 +177,28 @@ def del_money(rank: int, rank_money_map: dict[int, int]) -> dict[int, int]:
     del rank_money_map[rank]
     return rank_money_map
 
-def del_rank_safe(rank: int, c_rank_map_l: dict[str, int], rank_money_map_l: dict[int, int]) -> tuple[bool, int]:
+def del_rank(rank: int, c_rank_map_l: dict[str, int], rank_money_map_l: dict[int, int]) -> dict[str, bool | int]:
     """
-    Delete a rank if it is not assigned to any user.
+    Delete a rank if no user is using it.
 
     :param rank: Rank to be deleted.
     :param c_rank_map_l: Mapping of canonical user ID to rank.
     :param rank_money_map_l: Mapping of rank to money.
-    :return: A tuple containing whether the rank was deleted and its previous money.
+    :returns: Whether the rank was deleted and its previous money.
     """
     for can_uid in c_rank_map_l:
         if rank == c_rank_map_l[can_uid]:
             prev_money = rank_money_map_l[rank]
-            return False, prev_money
-    prev_money = del_rank_safe(rank, rank_money_map_l)
-    return True, prev_money
+            return {
+                "deleted": False,
+                "money": prev_money
+            }
+
+    deleted, prev_money = del_rank(rank, rank_money_map_l)
+    return {
+        "deleted": deleted,
+        "money": prev_money
+    }
 
 def del_money_unsafe(money: int, rank_money_map_l: dict[int, int]):
     """
