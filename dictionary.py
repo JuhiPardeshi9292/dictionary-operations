@@ -187,3 +187,22 @@ def del_rank_safe(rank: int, c_rank_map_l: dict[str, int], rank_money_map_l: dic
             return False, prev_money
     prev_money = del_rank_safe(rank, rank_money_map_l)
     return True, prev_money
+
+def del_money_unsafe(money: int, rank_money_map_l: dict[int, int]):
+    """
+    Delete all ranks associated with the given money amount.
+
+    :param money: Money amount to be deleted.
+    :param rank_money_map_l: Mapping of rank to money.
+    :return: Updated rank-to-money mapping.
+    """
+    deletable_ranks: set[int] = set()
+
+    for rank in rank_money_map_l:
+        if  money == rank_money_map_l[rank]
+            deletable_ranks.add(rank)
+
+    for rank in deletable_ranks:
+        del rank_money_map_l[rank]
+    return rank_money_map_l
+
