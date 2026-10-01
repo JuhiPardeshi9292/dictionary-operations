@@ -196,7 +196,7 @@ def del_rank(rank: int, c_rank_map_l: dict[str, int], rank_money_map_l: dict[int
 
     deleted, prev_money = del_rank(rank, rank_money_map_l)
     return {
-        "deleted": deleted,
+        "deleted": True,
         "money": prev_money
     }
 
