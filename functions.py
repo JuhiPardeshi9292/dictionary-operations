@@ -190,7 +190,7 @@ def calc_g(n: int) -> float:
 
     return total
 
-def calc_g(x: int) -> int:
+def calc_g(x: int) -> float:
     """
     Calculate the sum from x down to 1.
 
