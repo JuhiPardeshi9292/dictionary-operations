@@ -92,9 +92,23 @@ def update_rank(uid: str, new_rank: int, c_rank_map: dict[str, int], u_c_map: di
     :param new_rank: New rank to assign.
     :param c_rank_map: Mapping of canonical user ID to rank.
     :param u_c_map: Mapping of human-readable user ID to canonical user ID.
-    :returns: The updated rank.
+    :return: The updated rank.
     """
     prev_rank = get_rank(uid, c_rank_map, u_c_map)
     can_uid = u_c_map[uid]
     c_rank_map[can_uid] = new_rank
     return prev_rank
+
+def get_money(uid: str, rank_money_map: dict[int, int], c_rank_map: dict[str, int], u_c_map: dict[str, str]) -> int:
+    """
+    Get the money associated with a user's rank.
+
+    :param uid: Human-readable user ID.
+    :param rank_money_map: Mapping of rank to money.
+    :param c_rank_map: Mapping of canonical user ID to rank.
+    :param u_c_map: Mapping of human-readable user ID to canonical user ID.
+    :return: The money associated with the user's rank.
+    """
+    rank = get_rank(uid, c_rank_map, u_c_map)
+    money = rank_money_map[rank]
+    return money
