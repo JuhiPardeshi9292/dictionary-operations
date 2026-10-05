@@ -171,7 +171,7 @@ def del_money(money: int, rank_money_map: dict[int, int]) -> dict[int, int]:
     del rank_money_map[money]
     return rank_money_map
 
-def del_rank(rank: int, c_rank_map_l: dict[str, int], rank_money_map_l: dict[int, int]) -> tuple[bool, int]:
+def del_rank_unsafe(rank: int, c_rank_map_l: dict[str, int], rank_money_map_l: dict[int, int]) -> tuple[bool, int]:
     """
     Delete a rank if no user is using it.
 
@@ -185,7 +185,7 @@ def del_rank(rank: int, c_rank_map_l: dict[str, int], rank_money_map_l: dict[int
             prev_money = rank_money_map_l[rank]
             return False, prev_money
 
-    prev_money = del_rank(rank, rank_money_map_l)
+    prev_money = del_rank_unsafe(rank, rank_money_map_l)
     return True, prev_money
 
 def del_money_unsafe(money: int, rank_money_map_l: dict[int, int]):
