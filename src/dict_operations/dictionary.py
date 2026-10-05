@@ -1,4 +1,4 @@
-def get_first_name(uid: str, c_fn_map: dict[str, str], u_c_map: dict[str, str]) -> str:
+def get_first_name(uid: str,u_c_map: dict[str, str],  c_fn_map: dict[str, str]) -> str:
     """
     Get the first name of a user.
 
@@ -62,14 +62,14 @@ def update_first_name(uid: str, new_first_name: str, c_fn_map: dict[str, str], u
     :param new_first_name: New first name to assign.
     :param c_fn_map: Mapping of canonical user ID to first name.
     :param u_c_map: Mapping of human-readable user ID to canonical user ID.
-    :return: The updated first name.
+    :return: The previous first name.
     """
-    first_name = get_first_name(uid, c_fn_map, u_c_map)
+    prev_first_name = get_first_name(uid, c_fn_map, u_c_map)
     can_uid = u_c_map[uid]
     c_fn_map[can_uid] = new_first_name
-    return first_name
+    return prev_first_name
 
-def update_last_name(uid: str, new_last_name: str, c_fn_map: dict[str, str], u_c_map: dict[str, str]) -> str:
+def update_last_name(uid: str, new_last_name: str, c_ln_map: dict[str, str], u_c_map: dict[str, str]) -> str:
     """
     Update the last name of a user.
 
@@ -77,12 +77,12 @@ def update_last_name(uid: str, new_last_name: str, c_fn_map: dict[str, str], u_c
     :param new_last_name: New last name to assign.
     :param c_fn_map: Mapping of canonical user ID to last name.
     :param u_c_map: Mapping of human-readable user ID to canonical user ID.
-    :return: The updated last name.
+    :return: The previous last name.
     """
-    last_name = get_first_name(uid, c_fn_map, u_c_map)
+    prev_last_name = get_last_name(uid, c_ln_map, u_c_map)
     can_uid = u_c_map[uid]
-    c_fn_map[can_uid] = new_last_name
-    return last_name
+    c_ln_map[can_uid] = new_last_name
+    return prev_last_name
 
 def update_rank(uid: str, new_rank: int, c_rank_map: dict[str, int], u_c_map: dict[str, str]) -> int:
     """
@@ -139,8 +139,7 @@ def dec_amt(rank: int, dec_amt: int, rank_money_map: dict[int, int]) -> int:
     prev_amt = inc_amt(rank, -dec_amt, rank_money_map)
     return prev_amt
 
-def del_user(uid: str, u_c_map: dict[str, str], c_fn_map: dict[str, str], c_ln_map: dict[str, str], c_rank_map: dict[str, int]) -> \
-        dict[str, str | int]:
+def del_user(uid: str, u_c_map: dict[str, str], c_fn_map: dict[str, str], c_ln_map: dict[str, str], c_rank_map: dict[str, int]) -> tuple[str, str, str, int]:
     """
     Delete a user from all user-related maps.
 
@@ -159,12 +158,7 @@ def del_user(uid: str, u_c_map: dict[str, str], c_fn_map: dict[str, str], c_ln_m
     del c_fn_map[can_uid]
     del c_ln_map[can_uid]
     del c_rank_map[can_uid]
-    return {
-        "uid": can_uid,
-        "first_name": prev_fn,
-        "last_name": prev_ln,
-        "rank": prev_rank
-    }
+    return can_uid, prev_fn, prev_ln, prev_rank
 
 def del_money(rank: int, rank_money_map: dict[int, int]) -> dict[int, int]:
     """
@@ -177,7 +171,7 @@ def del_money(rank: int, rank_money_map: dict[int, int]) -> dict[int, int]:
     del rank_money_map[rank]
     return rank_money_map
 
-def del_rank(rank: int, c_rank_map_l: dict[str, int], rank_money_map_l: dict[int, int]) -> dict[str, bool | int]:
+def del_rank(rank: int, c_rank_map_l: dict[str, int], rank_money_map_l: dict[int, int]) -> tuple[bool, int]:
     """
     Delete a rank if no user is using it.
 
@@ -189,16 +183,10 @@ def del_rank(rank: int, c_rank_map_l: dict[str, int], rank_money_map_l: dict[int
     for can_uid in c_rank_map_l:
         if rank == c_rank_map_l[can_uid]:
             prev_money = rank_money_map_l[rank]
-            return {
-                "deleted": False,
-                "money": prev_money
-            }
+            return False, prev_money
 
-    deleted, prev_money = del_rank(rank, rank_money_map_l)
-    return {
-        "deleted": True,
-        "money": prev_money
-    }
+    prev_money = del_rank(rank, rank_money_map_l)
+    return True, prev_money
 
 def del_money_unsafe(money: int, rank_money_map_l: dict[int, int]):
     """
@@ -218,7 +206,7 @@ def del_money_unsafe(money: int, rank_money_map_l: dict[int, int]):
         del rank_money_map_l[rank]
     return rank_money_map_l
 
-def del_money_safe(money: int, rank_money_map_l: dict[int, int], c_rank_map_l: dict[str, int]) :
+def del_money_safe(money: int, rank_money_map_l: dict[int, int], c_rank_map_l: dict[str, int]) -> tuple[bool, int]:
     """
     Safely delete ranks associated with a given money amount.
 
