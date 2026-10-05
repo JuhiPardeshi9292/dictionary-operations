@@ -171,7 +171,19 @@ def del_money_unsafe2(money: int, rank_money_map: dict[int, int]) -> dict[int, i
     del rank_money_map[money]
     return rank_money_map
 
-def del_rank_unsafe(rank: int, c_rank_map_l: dict[str, int], rank_money_map_l: dict[int, int]) -> tuple[bool, int]:
+def del_rank_unsafe(rank: int, rank_money_map: dict[int, int]) -> tuple[bool, int]:
+    """
+    Delete a rank without checking whether a user is using it.
+
+    :param rank: Rank to be deleted.
+    :param rank_money_map: Mapping of rank to money.
+    :return: Whether the rank was deleted and its previous money.
+    """
+    prev_money = rank_money_map[rank]
+    del rank_money_map[rank]
+    return True, prev_money
+
+def del_rank(rank: int, c_rank_map_l: dict[str, int], rank_money_map_l: dict[int, int]) -> tuple[bool, int]:
     """
     Delete a rank if no user is using it.
 
