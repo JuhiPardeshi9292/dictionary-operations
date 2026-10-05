@@ -160,17 +160,6 @@ def del_user(uid: str, u_c_map: dict[str, str], c_fn_map: dict[str, str], c_ln_m
     del c_rank_map[can_uid]
     return can_uid, prev_fn, prev_ln, prev_rank
 
-def del_money_unsafe2(money: int, rank_money_map: dict[int, int]) -> dict[int, int]:
-    """
-    Delete the money associated with a rank.
-
-    :param money: money needs to be deleted.
-    :param rank_money_map: Mapping of rank to money.
-    :returns: Updated rank-to-money mapping.
-    """
-    del rank_money_map[money]
-    return rank_money_map
-
 def del_rank_unsafe(rank: int, rank_money_map: dict[int, int]) -> tuple[bool, int]:
     """
     Delete a rank without checking whether a user is using it.
@@ -197,7 +186,7 @@ def del_rank(rank: int, c_rank_map_l: dict[str, int], rank_money_map_l: dict[int
             prev_money = rank_money_map_l[rank]
             return False, prev_money
 
-    prev_money = del_rank_unsafe(rank, rank_money_map_l)
+    deleted, prev_money = del_rank_unsafe(rank, rank_money_map_l)
     return True, prev_money
 
 def del_money_unsafe(money: int, rank_money_map_l: dict[int, int])-> dict[int, int]:
