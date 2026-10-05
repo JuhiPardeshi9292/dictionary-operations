@@ -62,7 +62,20 @@ if __name__ == '__main__':
     money = get_money("ss", rank_money_map, c_rank_map, u_c_map)
     increased_money = inc_amt(8, 5000, rank_money_map)
     decreased_money = dec_amt(8, 2000, rank_money_map)
-    deleted_user = del_user("as", u_c_map, c_fn_map, c_ln_map, c_rank_map)
-    deleted_rank = del_rank(8, c_rank_map, rank_money_map)
     deleted_money_unsafe = del_money_unsafe(2000, rank_money_map)
+
+
+    deleted_user = del_user("jp", u_c_map, c_fn_map, c_ln_map, c_rank_map)
+    can_uid = deleted_user.can_uid
+    first_name = deleted_user.first_name
+    last_name = deleted_user.last_name
+    rank = deleted_user.rank
+
+    deleted_rank = del_rank(8, c_rank_map, rank_money_map)
+    deleted = deleted_rank.deleted
+    money = deleted_rank.money
+
     deleted_money = del_money(2000, rank_money_map, c_rank_map)
+    deleted = deleted_money.deleted
+    money = deleted_money.money
+
