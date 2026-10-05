@@ -160,15 +160,15 @@ def del_user(uid: str, u_c_map: dict[str, str], c_fn_map: dict[str, str], c_ln_m
     del c_rank_map[can_uid]
     return can_uid, prev_fn, prev_ln, prev_rank
 
-def del_money(rank: int, rank_money_map: dict[int, int]) -> dict[int, int]:
+def del_money(money: int, rank_money_map: dict[int, int]) -> dict[int, int]:
     """
     Delete the money associated with a rank.
 
-    :param rank: Rank whose money needs to be deleted.
+    :param money: money needs to be deleted.
     :param rank_money_map: Mapping of rank to money.
     :returns: Updated rank-to-money mapping.
     """
-    del rank_money_map[rank]
+    del rank_money_map[money]
     return rank_money_map
 
 def del_rank(rank: int, c_rank_map_l: dict[str, int], rank_money_map_l: dict[int, int]) -> tuple[bool, int]:
