@@ -10,10 +10,10 @@ from src.dict_operations.dictionary import (
     inc_amt,
     dec_amt,
     del_user,
-    del_money,
+    del_rank_unsafe,
     del_rank,
     del_money_unsafe,
-    del_money_safe,
+    del_money,
 )
 from src.dict_operations.functions import calc_func, calc_sum
 
@@ -63,7 +63,6 @@ if __name__ == '__main__':
     increased_money = inc_amt(8, 5000, rank_money_map)
     decreased_money = dec_amt(8, 2000, rank_money_map)
     deleted_user = del_user("as", u_c_map, c_fn_map, c_ln_map, c_rank_map)
-    deleted_money = del_money(2000, rank_money_map)
     deleted_rank = del_rank(8, c_rank_map, rank_money_map)
     deleted_money_unsafe = del_money_unsafe(2000, rank_money_map)
-    deleted_money_safe = del_money_safe(8000, rank_money_map, c_rank_map)
+    deleted_money = del_money(2000, rank_money_map, c_rank_map)
