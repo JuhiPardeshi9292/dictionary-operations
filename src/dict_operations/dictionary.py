@@ -188,7 +188,7 @@ def del_rank_unsafe(rank: int, c_rank_map_l: dict[str, int], rank_money_map_l: d
     prev_money = del_rank_unsafe(rank, rank_money_map_l)
     return True, prev_money
 
-def del_money_unsafe(money: int, rank_money_map_l: dict[int, int]):
+def del_money_unsafe(money: int, rank_money_map_l: dict[int, int])-> dict[int, int]:
     """
     Delete all ranks associated with the given money amount.
 
