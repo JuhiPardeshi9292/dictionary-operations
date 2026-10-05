@@ -160,7 +160,7 @@ def del_user(uid: str, u_c_map: dict[str, str], c_fn_map: dict[str, str], c_ln_m
     del c_rank_map[can_uid]
     return can_uid, prev_fn, prev_ln, prev_rank
 
-def del_money(money: int, rank_money_map: dict[int, int]) -> dict[int, int]:
+def del_money_unsafe2(money: int, rank_money_map: dict[int, int]) -> dict[int, int]:
     """
     Delete the money associated with a rank.
 
@@ -206,7 +206,7 @@ def del_money_unsafe(money: int, rank_money_map_l: dict[int, int])-> dict[int, i
         del rank_money_map_l[rank]
     return rank_money_map_l
 
-def del_money_safe(money: int, rank_money_map_l: dict[int, int], c_rank_map_l: dict[str, int]) -> tuple[bool, int]:
+def del_money(money: int, rank_money_map_l: dict[int, int], c_rank_map_l: dict[str, int]) -> tuple[bool, int]:
     """
     Safely delete ranks associated with a given money amount.
 
